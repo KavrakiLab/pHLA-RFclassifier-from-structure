@@ -161,6 +161,7 @@ The output probability (defined as the mean output probability across the ensemb
 
 The script used to generate the models can be found in `model-creation/build_model.py` and `model-creation/ensemble_build_model.py`.
 All cross-validation and leave-one-allele-out tests can be found in those scripts as well.
-The raw APE-Gen output along with the featurized conformations is available upon request.
+The dataset of (sigmoid) featurized conformations of the single-conformation dataset can be found in `/rf_classifier/data_singleconf_sig.pkl`.
+The raw APE-Gen output of pHLA structures along with the other datasets of featurized conformations, including the ensemble-enriched versions) are available upon request.
 
 
