@@ -9,7 +9,7 @@ Therefore, this tutorial requires installing docker.
 ### 1. Download the image from docker hub (Warning: large image - 6.56GB)
 
 ```
-docker pull jayab867/apegen:rf_classifier
+docker pull kavrakilab/apegen:rf_classifier
 ```
 
 ### 2. Go to the folder in which the analysis will be performed, and create a container
@@ -17,7 +17,7 @@ docker pull jayab867/apegen:rf_classifier
 This will lead you to the environment defined within the image inside a folder called `data`
 
 ```
-docker run -it --rm -v $(pwd):/data --workdir "/data" jayab867/apegen:rf_classifier
+docker run -it --rm -v $(pwd):/data --workdir "/data" kavrakilab/apegen:rf_classifier
 ```
 
 ### 3. Run APE-Gen to model conformations of the peptide-MHC of interest
@@ -150,8 +150,8 @@ The script takes a single input: the location of the folder with the ensemble
 In a particular folder, run the following to perform a classification using our example from above.
 
 ```
-docker pull jayab867/apegen:rf_classifier_ensemble
-docker run -it --rm -v $(pwd):/data --workdir "/data" jayab867/apegen:rf_classifier_ensemble
+docker pull kavrakilab/apegen:rf_classifier_ensemble
+docker run -it --rm -v $(pwd):/data --workdir "/data" kavrakilab/apegen:rf_classifier_ensemble
 python /rf_classifier/predict_ensemble.py wild/0/full_system_confs
 ```
 
