@@ -200,7 +200,7 @@ elif mode == "allele":
             clf = LogisticRegression(C=10.0, class_weight='balanced', n_jobs=-1)
         elif model == "xg":
             clf = XGBClassifier(n_jobs=8,n_estimators=1000,learning_rate=0.2,scale_pos_weight=num_neg_in_train/float(num_pos_in_train))
-        elif model == "rf"
+        elif model == "rf":
             clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features='log2', n_jobs=-1, class_weight='balanced', oob_score=True)
 
         clf.fit(X_train, y_train)
