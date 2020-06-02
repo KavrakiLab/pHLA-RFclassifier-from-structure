@@ -80,6 +80,7 @@ def printMetrics(output_label, test_index=None):
 
 mode = sys.argv[1] # kfold, allele, or full
 datasource = sys.argv[2] # folder with the data*.pkl files
+model = sys.argv[3] # lr, xg, or rf - only in kfold or allele mode
 
 print("Reading Data")
 
@@ -194,7 +195,14 @@ if mode == "kfold":
         print("Train Stats:", X_train.shape, num_pos_in_train/num_train, num_neg_in_train/num_train)
         print("Test Stats:", X_test.shape, num_pos_in_test/num_test, num_neg_in_test/num_test)
 
-        clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features="log2", n_jobs=-1, class_weight='balanced', oob_score=True)
+        if model == "lr":
+            clf = LogisticRegression(C=10.0, class_weight='balanced', n_jobs=-1)
+        elif model == "xg":
+            clf = XGBClassifier(n_jobs=8,n_estimators=1000,learning_rate=0.2,scale_pos_weight=num_neg_in_train/float(num_pos_in_train))
+        elif model == "rf"
+            clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features='log2', n_jobs=-1, class_weight='balanced', oob_score=True)
+
+        #clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features="log2", n_jobs=-1, class_weight='balanced', oob_score=True)
         clf.fit(X_train, y_train)
         printMetrics(str(k), test_index)
 
@@ -236,7 +244,14 @@ elif mode == "allele":
         print("Train Stats:", X_train.shape, num_pos_in_train/num_train, num_neg_in_train/num_train)
         print("Test Stats:", X_test.shape, num_pos_in_test/num_test, num_neg_in_test/num_test)
 
-        clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features='log2', n_jobs=-1, class_weight='balanced', oob_score=True)
+        if model == "lr":
+            clf = LogisticRegression(C=10.0, class_weight='balanced', n_jobs=-1)
+        elif model == "xg":
+            clf = XGBClassifier(n_jobs=8,n_estimators=1000,learning_rate=0.2,scale_pos_weight=num_neg_in_train/float(num_pos_in_train))
+        elif model == "rf"
+            clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features='log2', n_jobs=-1, class_weight='balanced', oob_score=True)
+
+        #clf = RandomForestClassifier(n_estimators=1000, criterion='gini', max_features='log2', n_jobs=-1, class_weight='balanced', oob_score=True)
         #clf = XGBClassifier(n_jobs=8)
 
         clf.fit(X_train, y_train)
